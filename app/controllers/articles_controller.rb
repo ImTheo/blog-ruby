@@ -1,11 +1,18 @@
 class ArticlesController < ApplicationController
+  
+  def increment
+    @article = Article.find(params[:id])
+    @cont = params[:cont].to_i + 1
+    redirect_to article_path(@article, cont: @cont)
+  end
+  
   def index
      @articles = Article.all
   end
 
   def show
-    id = params[:id]
-    @articles = Article.find(id)
+    @cont = params.fetch(:cont, 0).to_i
+    @articles = Article.find(params[:id])
   end
 
   def new
@@ -36,6 +43,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    @comments = Comment.where(article_id: params[:id])
+    @comments.destroy_all
     @article = Article.find(params[:id])
     @article.destroy
     redirect_to root_path, status: :see_other

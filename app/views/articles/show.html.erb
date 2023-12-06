@@ -6,6 +6,11 @@
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
                     }%></li>
+   
+  <li> <%= @cont %> </li>
+<%= form_with url: increment_article_path(cont: @cont), method: :post do %>
+  <%= submit_tag "presiona!" %>
+<% end %>
 </ul>
 
 <h2>Comments</h2>

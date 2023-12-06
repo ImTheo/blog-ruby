@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   root "articles#index"
   
   resources :articles do
+    member do
+      post 'increment/:cont', action: :increment, as: :increment
+    end
     resources :comments
   end
   # get "/articles", to: "articles#index"
