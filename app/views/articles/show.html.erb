@@ -1,42 +1,47 @@
-<h1> <%= @articles.title  %> </h1>
-<h1> <%= @articles.body  %> </h1>
-<ul>
-  <li><%= link_to "Editar", edit_article_path(@articles) %></li>
-  <li><%= link_to "Destruir",article_path(@articles), data: { 
+<div><%= link_to 'Volver',articles_path,class: "px-4 py-2 bg-blue-500 text-white rounded mt-4" %></div>
+<div>
+<h1 class="text-4xl font-bold mb-4"> <%= @articles.title  %> </h1>
+<p class="text-lg mb-4"> <%= @articles.body  %> </p>
+<ul class="list-disc">
+  <li class="mb-2"><%= link_to "Editar", edit_article_path(@articles), class: "text-blue-500" %></li>
+  <li class="mb-2"><%= link_to "Destruir",article_path(@articles), data: { 
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
-                    }%></li>
+                    }, class: "text-red-500" %></li>
    
-  <li> <%= @cont %> </li>
-<%= form_with url: increment_article_path(cont: @cont), method: :post do %>
-  <%= submit_tag "presiona!" %>
+  <li class="mb-2"> <%= @cont %> </li>
+<%= form_with url: increment_article_path(cont: @cont), method: :post, class: "mt-4" do %>
+  <%= submit_tag "presiona!", class: "px-4 py-2 bg-blue-500 text-white rounded" %>
 <% end %>
 </ul>
 
-<h2>Comments</h2>
+<h2 class="text-2xl font-bold mt-8">Comentarios</h2>
 <% @articles.comments.each do |comment| %>
-  <p>
-    <strong>Commenter:</strong>
-    <%= comment.commenter %>
-  </p>
+  <div class="bg-gray-100 p-4 rounded mt-4">
+    <p>
+      <strong>Usuario:</strong>
+      <%= comment.commenter %>
+    </p>
 
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.body %>
-  </p>
+    <p>
+      <strong>Comentario:</strong>
+      <%= comment.body %>
+    </p>
+  </div>
 <% end %>
 
-<h2>Add a comment:</h2>
-<%= form_with model: [ @articles, @articles.comments.build ] do |form| %>
-  <p>
-    <%= form.label :Usuario %><br>
-    <%= form.text_field :commenter %>
+<h2 class="text-2xl font-bold mt-8">Ingresa un comentario:</h2>
+<%= form_with model: [ @articles, @articles.comments.build ], class: "mt-4" do |form| %>
+  <p class="mb-2">
+    <%= form.label :Usuario, class: "font-bold" %><br>
+    <%= form.text_field :commenter, class: "border p-2 rounded w-full" %>
+  </p>
+  <p class="mb-2">
+    <%= form.label :Comentario, class: "font-bold" %><br>
+    <%= form.text_area :body, class: "border p-2 rounded w-full" %>
   </p>
   <p>
-    <%= form.label :Comentario %><br>
-    <%= form.text_area :body %>
-  </p>
-  <p>
-    <%= form.submit %>
+    <%= form.submit "Crear comentario", class: "px-4 py-2 bg-blue-500 text-white rounded" %>
   </p>
 <% end %>
+</div>

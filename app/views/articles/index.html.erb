@@ -6,25 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenida</title>
 </head>
-
-<h1>Articulos</h1>
-    <ul>
-        
+<body>
+<div>
+    <div class="container mx-auto px-4">
+    <h1 class="text-4xl font-bold mb-4">Artículos</h1>
+    <ul class="space-y-4">
         <% @articles.each do |t| %>
-            <li>
-                <a href="<%= article_path(t)%>">            
-                    <%= t.title %>
-                </a>
+            <li class="border p-4 rounded shadow">
+                <%= link_to t.title, article_path(t), class: "text-blue-500 hover:underline" %>
             </li>
         <% end %>
     </ul>
-<h1>Articulos funcionamiento link</h1>
-    <ul>        
-        <% @articles.each do |t| %>
-            <li>
-                <%= link_to t.body, t %>
-            </li>
-        <% end %>
-    </ul>
-    <%= link_to "New article", new_article_path %>
+</div>
+<div>
+    <%= link_to "Crear Artículo!", new_article_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+</div>
+<!-- <h1>artículos funcionamiento link</h1>
+    <div>
+        <ul>        
+            <% @articles.each do |t| %>
+                <li>
+                    <%= link_to t.body, t %>
+                </li>
+            <% end %>
+        </ul>
+        <%= link_to "New article", new_article_path %>
+    </div>
+    </div> -->
+</body>
 </html>
