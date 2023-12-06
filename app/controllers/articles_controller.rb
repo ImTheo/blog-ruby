@@ -6,9 +6,17 @@ class ArticlesController < ApplicationController
     redirect_to article_path(@article, cont: @cont)
   end
   
+  # def search
+  #   @articles = Article.where("title LIKE ?", "%#{params[:query]}%")
+  #   render :index
+  # end
+
   def index
-     @articles = Article.all
-     render :index
+    @articles = Article.all
+    if :query != nil
+      @articles = Article.where("title LIKE ?", "%#{params[:query]}%")
+    end
+    render :index
   end
 
   def show
@@ -48,7 +56,7 @@ class ArticlesController < ApplicationController
     @comments.destroy_all
     @article = Article.find(params[:id])
     @article.destroy
-    redirect_to root_path, status: :see_other
+    redirect_to articles_path, status: :see_other
   end
 
   private 

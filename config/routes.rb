@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
 
-  
+  get 'articles/search',to: "articles#search" , as: :articles_search
   resources :articles do
     member do
       post 'increment/:cont', action: :increment, as: :increment
